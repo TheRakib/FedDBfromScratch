@@ -5,13 +5,16 @@ const commentRouter = require("./router/commentRouter");
 const config = require("./config/config")
 const app = express();
 //middleware
+app.use(express.urlencoded({extended:true}))
+
+app.set("view engine", "ejs");
 
 //router 
 app.use(commentRouter)
 
 
 //listen to port 
-const port = process.env.PORT || 8001;
+const port = process.env.PORT || 8000;
 const options ={
     useUnifiedTopology: true, 
     useNewUrlParser: true

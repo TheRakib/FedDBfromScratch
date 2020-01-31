@@ -7,15 +7,26 @@ const router = express.Router();
 //comment(data) och ska visa den till comment router
 //create
 //skapa comment med post router och en ejs input fält (för torsdag)
-router.get("/createcomment", async (req, res)=>
+
+
+router.get("/createcomment", (req, res)=>{
+ 
+ res.render("comment");
+
+})
+
+
+router.post("/createcomment", async (req, res)=>
 {
+
+    //req.body.allanameproperties
 const comment =new Comment({
-        text: "Hej hej", 
-        author:"Kalle"
+        text: req.body.text, 
+        author:req.body.author
     })
  const response= await comment.save();
   console.log(response)
-  res.send("data created successfully")
+  res.redirect("/comment")
 
 
   //new Comment({text:"testdata", author:"authorname"}).save();
@@ -24,7 +35,9 @@ const comment =new Comment({
 
 router.get("/comment", async (req, res) => {
 const comments = await Comment.find()
- res.send(comments);
+// { comment : []}
+//comments:comments
+ res.render("comment", {comments});
 }
 )
 
