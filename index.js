@@ -2,15 +2,21 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const commentRouter = require("./router/commentRouter");
-const config = require("./config/config")
+const config = require("./config/config");
+const path = require("path");
 const app = express();
+
 //middleware
 app.use(express.urlencoded({extended:true}))
 
-app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "public")));
 
-//router 
-app.use(commentRouter)
+app.set("view engine", "ejs");
+ 
+ //en till middleware för css
+ 
+ //router 
+app.use(commentRouter);
 
 
 //listen to port 
