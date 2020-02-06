@@ -74,7 +74,7 @@ router.post("/update/:id", async(req, res)=>{
 
 //använd updateOne metoden för att kunna redigera comment
    await Comment.updateOne({_id:req.body._id},
-    {$set: {text: req.body.text, author:req.body.author}}) 
+    {$set: {text: req.body.text, author:req.body.author}}, {runValidators:true}) 
     res.redirect("/comment")
   //console.log(req.body);
  //res.send("test ")
