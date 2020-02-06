@@ -1,11 +1,8 @@
-<head>
-    <link rel="stylesheet" href="">
-</head>
 
 <form action="/update/:id"  method="Post">
  
- <input type="text" name="text" id="" value="<%=response.text%>">
- <input type="text" name="author" id="" value="<%=response.author%>">
+ <input type="text" name="text" id="" value="<%=response.text%>" required>
+ <input type="text" name="author" id="" value="<%=response.author%>" required>
  
 <input type="text" name="_id" value="<%=response._id%>" hidden>
 <button type="submit">Update</button>

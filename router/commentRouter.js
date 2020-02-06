@@ -24,9 +24,16 @@ const comment =new Comment({
         text: req.body.text, 
         author:req.body.author
     })
- const response= await comment.save();
-  console.log(response)
-  res.redirect("/comment")
+ await comment.save( (error, success)=>{
+     if(error) {
+         console.log(error);
+   res.send(error.message) 
+     }
+   else
+   res.redirect("/comment")
+     
+ } );
+ 
 
 
   //new Comment({text:"testdata", author:"authorname"}).save();
@@ -34,9 +41,12 @@ const comment =new Comment({
     
 
 router.get("/comment", async (req, res) => {
+
 const comments = await Comment.find()
+//.sort({author:req.query.sort})
 // { comment : []}
 //comments:comments
+ //console.log(req.query.sort)
  res.render("comment", {comments});
 }
 )
@@ -64,11 +74,13 @@ router.post("/update/:id", async(req, res)=>{
 
 //använd updateOne metoden för att kunna redigera comment
    await Comment.updateOne({_id:req.body._id},
-    {$set: {text: req.body.text, author:req.body.author} })
-  console.log(req.body);
+    {$set: {text: req.body.text, author:req.body.author}}) 
+    res.redirect("/comment")
+  //console.log(req.body);
  //res.send("test ")
- res.redirect("/comment")
+
  })
+ 
 
 module.exports = router;
 /* //create 
@@ -76,3 +88,7 @@ new Modelnamn(  {ettobject}).save()
 // find/read 
 Modelnamn.find()
  */
+
+//min max 
+//error validation 
+//debugging 
